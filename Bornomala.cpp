@@ -17,8 +17,7 @@
 #include <Windows.h>
 #include<vector>
 using namespace std;
-int consK = 10;
-int consP = 20;
+
 //read from file
 string read_file(string filename){
     string line,str="";
@@ -119,13 +118,11 @@ string keygenerator(int mlength){
 			}
 		}
 	}
-	//Key ascii summation & key numeric summation calculation
+	//ascii-numeric summation
 	int numb,countK=0;
-//	,kval=0;
 	for(int i=0;i<klength;i++){
-	numb= int(K[i]);
+		numb= int(K[i]);
 		if(numb>=48 && numb<=57){
-//			kval=kval+ numb-48;
 			countK=countK+numb-48;
 		}
 		else{
@@ -133,22 +130,14 @@ string keygenerator(int mlength){
 		}
 	}
 	countK += mlength;
-	cout<<"\n\t\tcountK: "<<countK;
-	
-	//enhance Key
-	//int i=0,j=0;
-	//string A[mlength];
-	
-	//enhance
-	cout<<"\n\t\tMlen "<<mlength<<" Klen "<<klength<<endl; 
+
+	//Key Enhancement
 	if(mlength>klength){
-		int mul = mlength/klength;
-		int add = mlength - (mul*klength);
-	//	mul -=1;
-		cout<<mul<<" "<<add<<endl;
-		if(mul>0){
+		int rep = mlength/klength;
+		int add = mlength - (rep*klength);
+		if(rep>0){
 			ostringstream os;
-			for(int i = 0; i < mul; i++){
+			for(int i = 0; i < rep; i++){
         		os << K;
         	}
         	K = os.str();
@@ -161,41 +150,31 @@ string keygenerator(int mlength){
 		}
 	}
 	else if(mlength<klength){
-		//K.erase(mlength,klength);
-		mlength = klength;
-	}
-	cout<<"\n\t\tEnhanced Key: "<<K<<" Ksize: "<<K.size()<<endl; 
-	cout<<"\n\t\tcountK "<<countK<<" K[0] "<<int(K[0])<<endl;
+		mlength = klength;		//key remain same len. if 
+	}							//message is smaller than key
 	
 	//Key substitution
 	for(int i=0;i<mlength;i++){
 		numb= int(K[i]);
-		countK=(numb +countK)%95;
+		countK=(K[i]+countK)%95;
 		numb=numb+countK;
-		//cout<<" "<<numb;
 		if(numb>126){
 			numb=numb-95;
 		}
 		K[i]=numb;
 	}
-
-    cout<<"\n\t\tSubstitute Key: "<<K<<endl;
     
-    //random-indexing shuffle
+    //random-indexing
     int pos; char temp;
     srand(1);
     for(int i=0; i<mlength; i++){
     	pos = int (K[i]);
-    	//r_index = rand();
     	pos = (rand() % pos);
     	pos = pos % mlength;
-    	cout<<" "<<pos;
     	temp = K[i];
     	K[i] = K[pos];
     	K[pos] = temp;
 	}
-	
-	cout<<"\n\t\tRandom-shuf: "<<K;
 
 return K;
 }
@@ -332,6 +311,7 @@ void thanking (){
 
 //padding
 string padding(string C,string K){
+	//length formatting
 	string tempS;
 	char temp;
 	int len,elen,klen,pad,i,j,t;
@@ -342,7 +322,6 @@ string padding(string C,string K){
 		C = C+ "~";
 		elen = elen+1;
 	}
-	cout<<"\ntilding: "<<C<<endl;
 	pad = elen-len;
 	//further key enhancement
 	if(klen<elen){
@@ -357,24 +336,17 @@ string padding(string C,string K){
 	else if(klen>elen){
 		K.erase(klen,elen);
 	}
-	cout<<"En.Key:  "<<K<<endl;
-	//reversible shuffle
-//	srand(1);
+	//Key-triggered indexing
 	for(i=elen-1;i>=0;i--){
 		t = int (K[i]);
-//		t = rand() % t;
 		j = t % elen;
-		cout<<" "<<j;
 		temp = C[i];
 		C[i] = C[j];
 		C[j] = temp;
-		
 	}
-	cout<<"\nBlending tild: "<<C<<endl;
-//	C = anagram1(C);
-//	cout<<"shuffle: "<<C<<endl;
+	//hexadecimal conversion
 	C = tohex(C);
-	cout<<"Hex:     "<<C<<endl;
+	//Blending characters
 	int fl=0,k;
 	j=0;
 	for(i=0; i<C.size(); i+=2){
@@ -404,7 +376,8 @@ string padding(string C,string K){
 	}
 	return C;
 }
-int norm1(string C){
+//returning padding bytes
+int pad_bytes(string C){
 	int i,pad=0,len;
 	unsigned int x;
 	string tempS="";
@@ -413,7 +386,6 @@ int norm1(string C){
     	stringstream ss;
     	ss << hex << tempS;
     	ss >> x;
-//    	cout<<x<<" ";
     	tempS = "";
     	if(x<32 || x>125){
     		pad += 1;
@@ -424,6 +396,7 @@ return pad;
 }
 //normalizing
 string normalizing(string C,string K){
+	//character separation
 	int i,pad=0,len,klen;
 	unsigned int x;
 	string tempS="";
@@ -432,7 +405,6 @@ string normalizing(string C,string K){
     	stringstream ss;
     	ss << hex << tempS;
     	ss >> x;
-//    	cout<<x<<" ";
     	tempS = "";
     	if(x<32 || x>125){
     		C[i] = '7';
@@ -440,12 +412,9 @@ string normalizing(string C,string K){
     		pad += 1;
 		}
 	}
-	cout<<"spaceing "<<C<<endl;
+	//ascii conversion
 	C = to_str(C);
-	cout<<"Ascii:   "<<C<<endl;
-//	C = anagram2(C);
-//	cout<<"shuffle: "<<C<<endl;
-
+	//further key enhancement
 	len = C.size();
 	klen = K.size();
 	int t,j;
@@ -462,19 +431,15 @@ string normalizing(string C,string K){
 	else if(klen>len){
 		K.erase(klen,len);
 	}
-	cout<<"Key: "<<K<<endl;
-//	srand(1);
-//	for(i=len-1;i> len-k;i--){
+	//Key-triggered rev. indexing
 	for(i=0;i<len;i++){
 		t = int (K[i]);
-//		t = rand() % t;
 		j = t % len;
 		temp = C[i];
 		C[i] = C[j];
 		C[j] = temp;
-//		cout<<C<<endl;
 	}
-	cout<<"Shuffle: "<<C<<endl;
+	//length formating
 	C.erase((len-pad), len);
 return C;
 }
@@ -516,7 +481,7 @@ int main(){
 		}
 		cout<<"\t\t ##---> ";
 		cin>>choice;
-		//Encryption chosen
+		//Encryption is chosen
         if(choice=="1"){
         	do{
         		system("cls");
@@ -552,18 +517,19 @@ int main(){
 					M= read_file(filename);
 				}
 				mlength = M.size();
-				K=keygenerator(mlength);
-				cout<<"\n\t\tFinal Key: "<<K;
-				M=encrypt(M,K);
-				cout<<"\n\t\tText-formatted Encrypt: "<<M;
-
+				K = keygenerator(mlength);
+				M = encrypt(M,K);
 				M = padding(M,K);
-
-				//M=tohex(M);
-				cout<<"\n\n\n\t\tCiphertext: "<<M<< endl;
+				cout<<"\n\n\n\t\tCiphertext: \n\t\t";
+				for(int i = 1; i<=M.size(); i++){
+						cout<<M[i-1];
+						if((i%16)==0){
+							cout<<"\n\t\t";
+						}
+				}
 				HWND hwnd = GetDesktopWindow();
 				toClipboard(hwnd, M);
-				cout<<"\t\tCiphertext is coppied to clipboard!"<<endl;
+				cout<<"\n\t\tCiphertext is coppied to clipboard!"<<endl;
 				cout<<"\n";
     			char map5[5][50]={
 					"		|***********Encryption*************|.",
@@ -617,22 +583,17 @@ int main(){
 					M= read2_file(filename);
 
 				}
-				//string MP = M;
-				//M=to_str(M);
 				mlength = M.size();
 				mlength = mlength/2;
-
-				int pad = norm1(M);
+				int pad = pad_bytes(M);
 				mlength = mlength-pad;
-
-				K=keygenerator(mlength);
-				cout<<"\nM: "<<M<<endl;
+				K = keygenerator(mlength);
 				M = normalizing(M,K);
-				M=decrypt(M,K);
-				cout<<"\n\n\n\t\tPlaintext Message: "<<M<<endl;
+				M = decrypt(M,K);
+				cout<<"\n\n\n\t\tPlaintext Message:\n\t\t"<<M<<endl;
 				HWND hwnd = GetDesktopWindow();
 				toClipboard(hwnd, M);
-				cout<<"\t\tPlaintext is coppied to clipboard!"<<endl;
+				cout<<"\n\t\tPlaintext is coppied to clipboard!"<<endl;
 
 				cout<<"\n";
     			char map5[5][50]={
@@ -655,6 +616,7 @@ int main(){
 		}
 		else if(choice=="3"){
 			system("Cls");
+			cout<<endl;
 			cout<<endl;
 			char map3[28][70]=
 				{"	  _______________________________________________________",
@@ -706,4 +668,3 @@ int main(){
 	}
 	return 0;
 }
-
