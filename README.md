@@ -3,11 +3,11 @@
 
 <p align = "center">
 <img src = "images/crypto.jpg" width = "200"> <br> 
-<a href="#key_generation">Key_Generation</a> • <a href="#encryption">Encryption</a> • <a href="#decryption">Decryption</a> • <a href="#advantages">Advantages</a> •
+<a href="#key_generation">Key Generation</a> • <a href="#encryption">Encryption</a> • <a href="#decryption">Decryption</a> • <a href="#advantages">Advantages</a> •
 </p>
 
 ---
-Key_Generation
+Key Generation
 ---
 
 - A strong key is required, a minimum of 8 character
