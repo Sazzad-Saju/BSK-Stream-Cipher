@@ -1,1 +1,1 @@
-# Bornomala-Symmetric-Key Stream Cipher
+# Bornomala-Symmetric-Key (BSK) Stream Cipher
