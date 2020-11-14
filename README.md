@@ -79,3 +79,52 @@ Padding is done in 5 steps:
  ```
  082C7498034C3D6130597B4E5B2B772E3B7839625E2A4E20
  ```
+
+Decryption
+-------
+
+Decryption process divides in two parts:
+* Normalizing of Encrypted String (C)
+* Decryption in Base-Format (M)
+
+> Key Generation is always the first step in both Encryption and Decryption. <br>
+
+Normalizing of encrypted string is done with 5 steps:
+* Character seperation of CC and EA
+* Base conversion (C)
+* Format generated key (K)
+* Key-Triggered-reversible shuffle
+* Fix Length of encrypted string
+
+**Example:** <br>
+
+ We got:<p align = "center">
+  Generated Key (K) (21) = **,(V6T.xu 'boyXH}ygYJ(** <br>
+  Ciphertext (C) (24) = **082C7498034C3D6130597B4E5B2B772E3B7839625E2A4E20** <br>
+</p>
+
+Decryption:<p align = "center">
+  Character seperation of CC and EA = __7E2C747E7E4C3D6130597B4E5B2B772E3B7839625E2A4E20__ <br>
+  Base conversion (C) = __~,t~~L=a0Y{N[+w.;x9b^*N__ <br>
+  Format generated key (K) = __,(V6T.xu 'boyXH}ygYJ(,(V__ <br>
+  Key-triggered-reversible shuffle (C) (24) = __t+b=[N^x0.wY;, NL9*{a~~~__ <br>
+  Fix length (C) (21) = __t+b=[N^x0.wY;, NL9*{a__ <br>
+  Decryption in base-format (M) = **Hajee DanesH 26/10/19**
+ </p>
+ 
+ Final Decrypted Result:  
+ ```
+ Hajee DanesH 26/10/19
+ ```
+ 
+Advantages
+-------
+* Key used in this process meets standard password requirements
+* Slightest change of the key results a completely different encrypted string
+* Encrypted string is in hexadecimal format ranges from ASCII 0-255
+* Encrypted string is a multiplication of 16 in hex. 
+* RSA encryption is a way of key-distribution of BSK cipher. Thus removes the drawbacks of symmetric-key cipher.
+
+:copyright:Sazzad-Saju <p align = "center">
+ END OF DOCUMENT :smile:
+</p>
