@@ -10,12 +10,46 @@
 Key Generation
 ---
 
-- A strong key is required, a minimum of 8 character
+**Requirement:**
+- A strong key is required, a minimum of 8 characters
 - Key must have to contain uppercase, lowercase, and digits. 
 - No Space is allowed in a key
 
 > Gerated-Key is similar with hashing <br>
-> Unless fixed length hashing, the generated key is of any size depanding on inputs [variable-length hashing]
+> Unless fixed length hashing, the generated key is of any size depanding on inputs message [variable-length hashing]
+
+**Key Generation Process** <br>
+Roughly divided into three sections:
+* Key Enhancement
+* Key Substitution
+* Random-indexing shuffle
+
+**Example:** <br>
+ Let's assume:<p align = "center">
+  Initial Key (K) = **HstU@5200** <br>
+  Message (M) = **Hajee DanesH 26/10/19**
+</p>
+
+ Then:<p align = "center">
+  Enhanced Key = **HstU@5200HstU@5200Hst** <br>
+  Substitute Key = **6u,b.X(V'(g}T JyHxyYo** <br>
+  R-I Shuffle = **,(V6T.xu 'boyXH}ygYJ(**
+ </p>
+
+ Final Key: 
+ ```
+ ,(V6T.xu 'boyXH}ygYJ(
+ ```
 
 Encryption
 --------
+
+With generated key and plaintext, the encryption process started. It can divided into two parts:
+* Base-Format Encryption
+* Padding <br>
+
+Padding is done in 5 steps:
+* Format length of encrypted string (C)
+* Format length of generated key (K)
+* Key-triggered-reversible-shuffle
+* Randomizing with CC and EA characters
