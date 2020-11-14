@@ -15,7 +15,7 @@ Key Generation
 - Key must have to contain uppercase, lowercase, and digits. 
 - No Space is allowed in a key
 
-> Gerated-Key is similar with hashing <br>
+> Generated-Key is similar with hashing <br>
 > Unless fixed length hashing, the generated key is of any size depanding on inputs message [variable-length hashing]
 
 **Key Generation Process** <br>
@@ -25,6 +25,7 @@ Roughly divided into three sections:
 * Random-indexing shuffle
 
 **Example:** <br>
+
  Let's assume:<p align = "center">
   Initial Key (K) = **HstU@5200** <br>
   Message (M) = **Hajee DanesH 26/10/19**
@@ -52,4 +53,29 @@ Padding is done in 5 steps:
 * Format length of encrypted string (C)
 * Format length of generated key (K)
 * Key-triggered-reversible-shuffle
+* Hexadecimal-conversion
 * Randomizing with CC and EA characters
+
+**Example:** <br>
+
+ We got:<p align = "center">
+  Generated Key (K) (21) = **,(V6T.xu 'boyXH}ygYJ(** <br>
+  Message (M) (21) = **Hajee DanesH 26/10/19**
+</p>
+
+ Then:<p align = "center">
+  Base-Format Encryption (C) (21) = __t+b=[N^x0.wY;, NL9*{a__ <br>
+ </p>
+ 
+ Padding:<p align = "center">
+  Format length of encrypted string (C) (24) = __t+b=[N^x0.wY;, NL9*{a~~~__ <br>
+  Format length of generated key (K) (24) = **,(V6T.xu 'boyXH}ygYJ(,(V** <br>
+  Key-triggered-reversible shuffle (C) = __~,t~~L=a0Y{N[+w.;x9b^*N__ <br>
+  Hexadecimal-conversion = **7E2C747E7E4C3D6130597B4E5B2B772E3B7839625E2A4E20** <br>
+  Randomizing with CC and EA = **082C7498034C3D6130597B4E5B2B772E3B7839625E2A4E20**
+ </p>
+ 
+ Final Encrypted Result:  
+ ```
+ 082C7498034C3D6130597B4E5B2B772E3B7839625E2A4E20
+ ```
