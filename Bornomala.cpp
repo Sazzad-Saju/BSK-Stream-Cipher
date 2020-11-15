@@ -462,8 +462,7 @@ int main(){
  			"		 |                                     |.",
     		"		 |  1) Encryption                      |.",
    			"		 |  2) Decryption                      |.",
-    		"		 |  3) About                           |.",
-    		"		 |  4) Exit                            |.",
+    		"		 |  3) Exit                            |.",
     		"		 |                                     |.",
     		"		 |             Disclaimer              |.",
     		"		 | To encrypt or decrypt chosen key    |.",
@@ -615,52 +614,6 @@ int main(){
 			}while(yn != "n" and yn !="N");
 		}
 		else if(choice=="3"){
-			system("Cls");
-			cout<<endl;
-			cout<<endl;
-			char map3[28][70]=
-				{"	  _______________________________________________________",
-                "	 / \\                                                     \\.",
-                "	|   |  _____ ___.                  __     ____ ___       |.",
-                "	 \\__| /  _  \\\\_ |__   ____  __ ___/  |_  |    |   \\______|.",
-                "	    |/  /_\\  \\| __ \\ /  _ \\|  |  \\   __\\ |    |   /  ___/|.",
-                "	    /    |    \\ \\_\\ (  <_> )  |  /|  |   |    |  /\\___  \\|.",
-                "	    \\____|__  /___  /\\____/|____/ |__|   |______//____  >|.",
-                "	    |       \\/    \\/                                  \\/ |.",
-                "	    |                                                    |.",
-                "	    |    _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,_    |.",
-                "	    |                                                    |.",
-                "	    |                     Sazzad Saju                    |.",
-                "	    |                     ID:1602049                     |.",
-                "	    |            Email: sazzadsaju17@gmail.com           |.",
-                "	    |                                                    |.",
-                "	    |                Hajee Mohammad Danesh               |.",
-                "	    |           Science & Technology University          |.",
-                "	    |                    Dinajpur,5200                   |.",
-                "	    |                                                    |.",
-                "	    |                      Dept. Of                      |.",
-                "	    |            Computer Science & Engineering          |.",
-                "	    |                                                    |.",
-                "	    |    _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,_    |.",
-                "	    |                                                    |.",
-                "	    |                 Encrypt Everything :)              |.",
-                "	    |   _________________________________________________|___",
-                "	    |  /                                                    /.",
-                "	    \\_/Enter any key to continue or N/n to exit________HSTU/."};
-
-
-			for( int i=0;i<28;i++){
-				cout<<map3[i]<<endl;
-			}
-			cout<<"\n\n\t    ##---> ";
-			cin>>yn;
-			if(yn=="N" || yn== "n"){
-				thanking();
-				getch();
-				break;
-			}
-		}
-		else if(choice=="4"){
 			thanking();
 			flag=0;
 			getch();
