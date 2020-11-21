@@ -462,13 +462,14 @@ int main(){
  			"		 |                                     |.",
     		"		 |  1) Encryption                      |.",
    			"		 |  2) Decryption                      |.",
-    		"		 |  3) Exit                            |.",
+   			"		 |  3) Clean Hand                      |.",
+    		"		 |  4) Exit                            |.",
     		"		 |                                     |.",
     		"		 |             Disclaimer              |.",
-    		"		 | To encrypt or decrypt chosen key    |.",
-    		"		 | must have this validity: 1.At least |.",
-    		"		 | 8characters 2.No space 3.Contain one|.",
-    		"		 | uppercase one lowercase and a digit |.",
+    		"		 | Chosen  key  must  have  this: 1.At |.",
+    		"		 | least   8  characters   2. No space |.",
+    		"		 | 3. Contain  upper  lower and digits |.",
+    		"		 | 4. Always  clean hand after decrypt |.",
     		"		 |                                     |.",
     		"		 |   __________________________________|___",
     		"		 |  /                                     /.",
@@ -613,9 +614,18 @@ int main(){
 				}
 			}while(yn != "n" and yn !="N");
 		}
-		else if(choice=="3"){
+		else if(choice=="4"){
 			thanking();
 			flag=0;
+			getch();
+		}
+		else if(choice=="3"){
+			HWND hwnd = GetDesktopWindow();
+			OpenClipboard(hwnd);
+			EmptyClipboard();
+			CloseClipboard();
+			cout<<"\t\t##--> Your hand has been Cleared! Can't paste now\n";
+			cout<<"\t\t(Press Enter)";
 			getch();
 		}
 	}
