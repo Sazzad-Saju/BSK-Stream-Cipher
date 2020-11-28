@@ -336,6 +336,17 @@ string padding(string C,string K){
 	else if(klen>elen){
 		K.erase(klen,elen);
 	}
+	
+	//generate key2
+	int numb=0;
+	for(int i=0;i<elen;i++){
+		numb= (numb+int(K[i])) % 95;
+		if(numb<32){
+			numb=numb+32;
+		}
+		K[i]=numb;
+	}
+	
 	//Key-triggered indexing
 	for(i=elen-1;i>=0;i--){
 		t = int (K[i]);
@@ -351,6 +362,7 @@ string padding(string C,string K){
 	j=0;
 	for(i=0; i<C.size(); i+=2){
 		if((C[i] == '7') && (C[i+1] == 'E')){
+			fl = i/2;
 			if(fl %2 == 0){
 				k = int (K[j]);
 				k = rand() % k;
@@ -359,7 +371,6 @@ string padding(string C,string K){
 				C[i] = tempS[1];
 				C[i+1] = tempS[0];
 				j += 1;
-				fl +=1;
 			}
 			else{
 				k = int (K[j]);
@@ -430,6 +441,16 @@ string normalizing(string C,string K){
 	}
 	else if(klen>len){
 		K.erase(klen,len);
+	}
+	
+	//generate key2
+	int numb=0;
+	for(int i=0;i<len;i++){
+		numb= (numb+int(K[i])) % 95;
+		if(numb<32){
+			numb=numb+32;
+		}
+		K[i]=numb;
 	}
 	//Key-triggered rev. indexing
 	for(i=0;i<len;i++){
